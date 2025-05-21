@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <span routerLink="/" style="cursor: pointer">People Management</span>
+  <span class="flex-spacer"></span>
+  <button mat-button routerLink="/people" routerLinkActive="mat-accent">
+    <mat-icon>people</mat-icon>
+    People List
+  </button>
+  <button mat-button routerLink="/people/add" routerLinkActive="mat-accent">
+    <mat-icon>person_add</mat-icon>
+    Add Person
+  </button>
+</mat-toolbar>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

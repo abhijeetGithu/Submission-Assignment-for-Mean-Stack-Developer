@@ -1,0 +1,50 @@
+<div class="container mt-4">
+  <h2>{{ isNewPerson ? 'Add New Person' : 'Edit Person' }}</h2>
+  
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+  
+  <div *ngIf="loading" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  
+  <form [formGroup]="personForm" (ngSubmit)="onSubmit()" *ngIf="!loading">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" formControlName="name" 
+             [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">
+      <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+        <div *ngIf="f['name'].errors['required']">Name is required</div>
+      </div>
+    </div>
+    
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" formControlName="email"
+             [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+      <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+        <div *ngIf="f['email'].errors['required']">Email is required</div>
+        <div *ngIf="f['email'].errors['email']">Email must be a valid email address</div>
+      </div>
+    </div>
+    
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone</label>
+      <input type="text" class="form-control" id="phone" formControlName="phone"
+             [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }">
+      <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+        <div *ngIf="f['phone'].errors['required']">Phone is required</div>
+      </div>
+    </div>
+    
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-primary" [disabled]="loading">
+        {{ isNewPerson ? 'Add' : 'Update' }}
+      </button>
+      <button type="button" class="btn btn-secondary" routerLink="/people">Cancel</button>
+    </div>
+  </form>
+</div>
